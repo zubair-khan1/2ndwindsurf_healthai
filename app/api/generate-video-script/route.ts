@@ -1,4 +1,5 @@
 import { generateText } from "ai"
+import { google } from "@ai-sdk/google"
 
 export const maxDuration = 60
 
@@ -11,7 +12,7 @@ export async function POST(req: Request) {
     }
 
     const { text } = await generateText({
-      model: "xai/grok-beta",
+      model: google("gemini-2.5-flash"),
       prompt: `Convert this medical report analysis into a friendly, conversational video script in ${language}. 
 
 The script should:

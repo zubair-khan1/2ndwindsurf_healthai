@@ -1,27 +1,28 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 
 export default function PricingSection() {
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annually">("annually")
 
   const pricing = {
     starter: {
-      monthly: 0,
-      annually: 0,
+      monthly: 1,
+      annually: 1,
     },
     professional: {
-      monthly: 10,
-      annually: 8, // 20% discount for annual
+      monthly: 999,
+      annually: 799, // 20% discount for annual
     },
     enterprise: {
-      monthly: 99,
-      annually: 79, // 20% discount for annual
+      monthly: 2499,
+      annually: 1999, // 20% discount for annual
     },
   }
 
   return (
-    <div className="w-full flex flex-col justify-center items-center gap-2">
+    <div id="pricing" className="w-full flex flex-col justify-center items-center gap-2">
       {/* Header Section */}
       <div className="self-stretch px-6 md:px-24 py-12 md:py-16 border-b border-[rgba(55,50,47,0.12)] flex justify-center items-center gap-6">
         <div className="w-full max-w-[586px] px-6 py-5 shadow-[0px_2px_4px_rgba(50,45,43,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-4 shadow-none">
@@ -128,16 +129,16 @@ export default function PricingSection() {
               {/* Plan Header */}
               <div className="self-stretch flex flex-col justify-start items-center gap-9">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="text-[rgba(55,50,47,0.90)] text-lg font-medium leading-7 font-sans">Free</div>
+                  <div className="text-[rgba(55,50,47,0.90)] text-lg font-medium leading-7 font-sans">Starter</div>
                   <div className="w-full max-w-[242px] text-[rgba(41,37,35,0.70)] text-sm font-normal leading-5 font-sans">
-                    Perfect for individuals trying out Tabeer.
+                    Try Tabeer with 1 report analysis.
                   </div>
                 </div>
 
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
                   <div className="flex flex-col justify-start items-start gap-1">
                     <div className="relative h-[60px] flex items-center text-[#37322F] text-5xl font-medium leading-[60px] font-serif">
-                      <span className="invisible">${pricing.starter[billingPeriod]}</span>
+                      <span className="invisible">₹{pricing.starter[billingPeriod]}</span>
                       <span
                         className="absolute inset-0 flex items-center transition-all duration-500"
                         style={{
@@ -147,7 +148,7 @@ export default function PricingSection() {
                         }}
                         aria-hidden={billingPeriod !== "annually"}
                       >
-                        ${pricing.starter.annually}
+                        ₹{pricing.starter.annually}
                       </span>
                       <span
                         className="absolute inset-0 flex items-center transition-all duration-500"
@@ -158,7 +159,7 @@ export default function PricingSection() {
                         }}
                         aria-hidden={billingPeriod !== "monthly"}
                       >
-                        ${pricing.starter.monthly}
+                        ₹{pricing.starter.monthly}
                       </span>
                     </div>
                     <div className="text-[#847971] text-sm font-medium font-sans">
@@ -167,20 +168,22 @@ export default function PricingSection() {
                   </div>
                 </div>
 
-                <div className="self-stretch px-4 py-[10px] relative bg-[#37322F] shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center">
-                  <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-                  <div className="max-w-[108px] flex justify-center flex-col text-[#FBFAF9] text-[13px] font-medium leading-5 font-sans">
-                    Start for free
+                <Link href="/payment?plan=basic" className="self-stretch">
+                  <div className="self-stretch px-4 py-[10px] relative bg-[#37322F] shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center cursor-pointer hover:bg-[#37322F]/90 transition">
+                    <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
+                    <div className="max-w-[108px] flex justify-center flex-col text-[#FBFAF9] text-[13px] font-medium leading-5 font-sans">
+                      Get started
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
 
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
                 {[
-                  "Up to 3 reports per month",
-                  "Basic video explanations",
+                  "1 report analysis",
+                  "Basic AI insights",
                   "5 supported languages",
-                  "Report history (30 days)",
+                  "Report history (7 days)",
                   "Email support",
                 ].map((feature, index) => (
                   <div key={index} className="self-stretch flex justify-start items-center gap-[13px]">
@@ -217,7 +220,7 @@ export default function PricingSection() {
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
                   <div className="flex flex-col justify-start items-start gap-1">
                     <div className="relative h-[60px] flex items-center text-[#F0EFEE] text-5xl font-medium leading-[60px] font-serif">
-                      <span className="invisible">${pricing.professional[billingPeriod]}</span>
+                      <span className="invisible">₹{pricing.professional[billingPeriod]}</span>
                       <span
                         className="absolute inset-0 flex items-center transition-all duration-500"
                         style={{
@@ -227,7 +230,7 @@ export default function PricingSection() {
                         }}
                         aria-hidden={billingPeriod !== "annually"}
                       >
-                        ${pricing.professional.annually}
+                        ₹{pricing.professional.annually}
                       </span>
                       <span
                         className="absolute inset-0 flex items-center transition-all duration-500"
@@ -238,7 +241,7 @@ export default function PricingSection() {
                         }}
                         aria-hidden={billingPeriod !== "monthly"}
                       >
-                        ${pricing.professional.monthly}
+                        ₹{pricing.professional.monthly}
                       </span>
                     </div>
                     <div className="text-[#D2C6BF] text-sm font-medium font-sans">
@@ -248,12 +251,14 @@ export default function PricingSection() {
                 </div>
 
                 {/* CTA Button */}
-                <div className="self-stretch px-4 py-[10px] relative bg-[#FBFAF9] shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center">
-                  <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-                  <div className="max-w-[108px] flex justify-center flex-col text-[#37322F] text-[13px] font-medium leading-5 font-sans">
-                    Get started
+                <Link href="/payment?plan=pro" className="self-stretch">
+                  <div className="self-stretch px-4 py-[10px] relative bg-[#FBFAF9] shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center cursor-pointer hover:bg-[#F0EFEE] transition">
+                    <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
+                    <div className="max-w-[108px] flex justify-center flex-col text-[#37322F] text-[13px] font-medium leading-5 font-sans">
+                      Get started
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
 
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
@@ -299,7 +304,7 @@ export default function PricingSection() {
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
                   <div className="flex flex-col justify-start items-start gap-1">
                     <div className="relative h-[60px] flex items-center text-[#37322F] text-5xl font-medium leading-[60px] font-serif">
-                      <span className="invisible">${pricing.enterprise[billingPeriod]}</span>
+                      <span className="invisible">₹{pricing.enterprise[billingPeriod]}</span>
                       <span
                         className="absolute inset-0 flex items-center transition-all duration-500"
                         style={{
@@ -309,7 +314,7 @@ export default function PricingSection() {
                         }}
                         aria-hidden={billingPeriod !== "annually"}
                       >
-                        ${pricing.enterprise.annually}
+                        ₹{pricing.enterprise.annually}
                       </span>
                       <span
                         className="absolute inset-0 flex items-center transition-all duration-500"
@@ -320,7 +325,7 @@ export default function PricingSection() {
                         }}
                         aria-hidden={billingPeriod !== "monthly"}
                       >
-                        ${pricing.enterprise.monthly}
+                        ₹{pricing.enterprise.monthly}
                       </span>
                     </div>
                     <div className="text-[#847971] text-sm font-medium font-sans">
@@ -329,12 +334,14 @@ export default function PricingSection() {
                   </div>
                 </div>
 
-                <div className="self-stretch px-4 py-[10px] relative bg-[#37322F] shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center">
-                  <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-                  <div className="max-w-[108px] flex justify-center flex-col text-[#FBFAF9] text-[13px] font-medium leading-5 font-sans">
-                    Request API
+                <Link href="/payment?plan=enterprise" className="self-stretch">
+                  <div className="self-stretch px-4 py-[10px] relative bg-[#37322F] shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center cursor-pointer hover:bg-[#37322F]/90 transition">
+                    <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
+                    <div className="max-w-[108px] flex justify-center flex-col text-[#FBFAF9] text-[13px] font-medium leading-5 font-sans">
+                      Get started
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
 
               <div className="self-stretch flex flex-col justify-start items-start gap-2">

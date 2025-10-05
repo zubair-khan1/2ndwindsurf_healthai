@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function FooterSection() {
   return (
     <div className="w-full pt-10 flex flex-col justify-start items-start">
@@ -15,7 +17,12 @@ export default function FooterSection() {
           {/* Social Media Icons */}
           <div className="flex justify-start items-start gap-4">
             {/* Twitter/X Icon */}
-            <div className="w-6 h-6 relative overflow-hidden">
+            <a
+              href="https://x.com/abubakar_x_khnn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 relative overflow-hidden hover:opacity-70 transition-opacity cursor-pointer"
+            >
               <div className="w-6 h-6 left-0 top-0 absolute flex items-center justify-center">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -24,10 +31,15 @@ export default function FooterSection() {
                   />
                 </svg>
               </div>
-            </div>
+            </a>
 
             {/* LinkedIn Icon */}
-            <div className="w-6 h-6 relative overflow-hidden">
+            <a
+              href="https://www.linkedin.com/in/aboobakarkhan/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 relative overflow-hidden hover:opacity-70 transition-opacity cursor-pointer"
+            >
               <div className="w-6 h-6 left-0 top-0 absolute flex items-center justify-center">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -36,10 +48,15 @@ export default function FooterSection() {
                   />
                 </svg>
               </div>
-            </div>
+            </a>
 
             {/* GitHub Icon */}
-            <div className="w-6 h-6 relative overflow-hidden">
+            <a
+              href="https://github.com/aboobakar-khan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 relative overflow-hidden hover:opacity-70 transition-opacity cursor-pointer"
+            >
               <div className="w-6 h-6 left-0 top-0 absolute flex items-center justify-center">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -48,7 +65,7 @@ export default function FooterSection() {
                   />
                 </svg>
               </div>
-            </div>
+            </a>
           </div>
         </div>
 
@@ -60,21 +77,36 @@ export default function FooterSection() {
               Product
             </div>
             <div className="flex flex-col justify-end items-start gap-2">
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              <Link
+                href="/features"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Features
-              </div>
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </Link>
+              <a
+                href="/#how-it-works"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 How it Works
-              </div>
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </a>
+              <a
+                href="/#languages"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Languages
-              </div>
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </a>
+              <a
+                href="/#pricing"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 For Labs
-              </div>
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </a>
+              <Link
+                href="/api-docs"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 API Access
-              </div>
+              </Link>
             </div>
           </div>
 
@@ -82,43 +114,75 @@ export default function FooterSection() {
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
             <div className="text-[rgba(73,66,61,0.50)] text-sm font-medium leading-5 font-sans">Company</div>
             <div className="flex flex-col justify-center items-start gap-2">
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              <Link
+                href="/about"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 About us
-              </div>
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </Link>
+              <Link
+                href="/about"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Our team
-              </div>
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </Link>
+              <a
+                href="https://www.linkedin.com/in/aboobakarkhan/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Careers
-              </div>
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </a>
+              <Link
+                href="/privacy"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Privacy
-              </div>
-              <div className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </Link>
+              <a
+                href="mailto:contact@tabeer.health"
+                className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Contact
-              </div>
+              </a>
             </div>
           </div>
 
           {/* Resources Column */}
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
             <div className="text-[rgba(73,66,61,0.50)] text-sm font-medium leading-5 font-sans">Resources</div>
-            <div className="flex flex-col justify-center items-center gap-2">
-              <div className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+            <div className="flex flex-col justify-center items-start gap-2">
+              <Link
+                href="/terms"
+                className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Terms of use
-              </div>
-              <div className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </Link>
+              <Link
+                href="/api-docs"
+                className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 API Reference
-              </div>
-              <div className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </Link>
+              <Link
+                href="/api-docs"
+                className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Documentation
-              </div>
-              <div className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </Link>
+              <a
+                href="/#faq"
+                className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Help Center
-              </div>
-              <div className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors">
+              </a>
+              <a
+                href="mailto:support@tabeer.health"
+                className="self-stretch text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
+              >
                 Support
-              </div>
+              </a>
             </div>
           </div>
         </div>

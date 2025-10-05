@@ -3,10 +3,13 @@
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
-import SmartSimpleBrilliant from "../components/smart-simple-brilliant"
-import YourWorkInSync from "../components/your-work-in-sync"
-import EffortlessIntegration from "../components/effortless-integration-updated"
-import NumbersThatSpeak from "../components/numbers-that-speak"
+import Link from "next/link"
+import { FileText, CheckCircle2, Activity } from "lucide-react"
+import { Navbar } from "../components/navbar"
+import HealthDataVisual from "../components/health-data-visual"
+import HealthTrackingVisual from "../components/health-tracking-visual"
+import LanguageSupportVisual from "../components/language-support-visual"
+import TestResultsVisual from "../components/test-results-visual"
 import DocumentationSection from "../components/documentation-section"
 import TestimonialsSection from "../components/testimonials-section"
 import FAQSection from "../components/faq-section"
@@ -31,6 +34,29 @@ export default function LandingPage() {
   const [activeCard, setActiveCard] = useState(0)
   const [progress, setProgress] = useState(0)
   const mountedRef = useRef(true)
+
+  // Handle hash navigation (e.g., /#pricing)
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash
+      if (hash === '#pricing') {
+        // Wait for the component to render
+        setTimeout(() => {
+          const pricingSection = document.getElementById('pricing')
+          if (pricingSection) {
+            pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }, 100)
+      }
+    }
+
+    // Check on mount
+    handleHashScroll()
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashScroll)
+    return () => window.removeEventListener('hashchange', handleHashScroll)
+  }, [])
 
   useEffect(() => {
     const progressInterval = setInterval(() => {
@@ -80,7 +106,10 @@ export default function LandingPage() {
 
   return (
     <div className="w-full min-h-screen relative bg-[#F7F5F3] overflow-x-hidden flex flex-col justify-start items-center">
-      <div className="relative flex flex-col justify-start items-center w-full">
+      {/* Navbar */}
+      <Navbar />
+      
+      <div className="relative flex flex-col justify-start items-center w-full pt-16">
         {/* Main container with proper margins */}
         <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1060px] lg:w-[1060px] relative flex flex-col justify-start items-start min-h-screen">
           {/* Left vertical line */}
@@ -90,49 +119,10 @@ export default function LandingPage() {
           <div className="w-[1px] h-full absolute right-4 sm:right-6 md:right-8 lg:right-0 top-0 bg-[rgba(55,50,47,0.12)] shadow-[1px_0px_0px_white] z-0"></div>
 
           <div className="self-stretch pt-[9px] overflow-hidden border-b border-[rgba(55,50,47,0.06)] flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-[66px] relative z-10">
-            {/* Navigation */}
-            <div className="w-full h-12 sm:h-14 md:h-16 lg:h-[84px] absolute left-0 top-0 flex justify-center items-center z-20 px-6 sm:px-8 md:px-12 lg:px-0">
-              <div className="w-full h-0 absolute left-0 top-6 sm:top-7 md:top-8 lg:top-[42px] border-t border-[rgba(55,50,47,0.12)] shadow-[0px_1px_0px_white]"></div>
-
-              <div className="w-full max-w-[calc(100%-32px)] sm:max-w-[calc(100%-48px)] md:max-w-[calc(100%-64px)] lg:max-w-[700px] lg:w-[700px] h-10 sm:h-11 md:h-12 py-1.5 sm:py-2 px-3 sm:px-4 md:px-4 pr-2 sm:pr-3 bg-[#F7F5F3] backdrop-blur-sm shadow-[0px_0px_0px_2px_white] overflow-hidden rounded-[50px] flex justify-between items-center relative z-30">
-                <div className="flex justify-center items-center">
-                  <div className="flex justify-start items-center">
-                    <div className="flex flex-col justify-center text-[#2F3037] text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-5 font-sans">
-                      Tabeer
-                    </div>
-                  </div>
-                  <div className="pl-3 sm:pl-4 md:pl-5 lg:pl-5 flex justify-start items-start hidden sm:flex flex-row gap-2 sm:gap-3 md:gap-4 lg:gap-4">
-                    <div className="flex justify-start items-center">
-                      <div className="flex flex-col justify-center text-[rgba(49,45,43,0.80)] text-xs md:text-[13px] font-medium leading-[14px] font-sans">
-                        Upload
-                      </div>
-                    </div>
-                    <div className="flex justify-start items-center">
-                      <div className="flex flex-col justify-center text-[rgba(49,45,43,0.80)] text-xs md:text-[13px] font-medium leading-[14px] font-sans">
-                        Dashboard
-                      </div>
-                    </div>
-                    <div className="flex justify-start items-center">
-                      <div className="flex flex-col justify-center text-[rgba(49,45,43,0.80)] text-xs md:text-[13px] font-medium leading-[14px] font-sans">
-                        API
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="h-6 sm:h-7 md:h-8 flex justify-start items-start gap-2 sm:gap-3">
-                  <div className="px-2 sm:px-3 md:px-[14px] py-1 sm:py-[6px] bg-white shadow-[0px_1px_2px_rgba(55,50,47,0.12)] overflow-hidden rounded-full flex justify-center items-center">
-                    <div className="flex flex-col justify-center text-[#37322F] text-xs md:text-[13px] font-medium leading-5 font-sans">
-                      Log in
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* Hero Section */}
-            <div className="pt-16 sm:pt-20 md:pt-24 lg:pt-[216px] pb-8 sm:pb-12 md:pb-16 flex flex-col justify-start items-center px-2 sm:px-4 md:px-8 lg:px-0 w-full sm:pl-0 sm:pr-0 pl-0 pr-0">
-              <div className="w-full max-w-[937px] lg:w-[937px] flex flex-col justify-center items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-                <div className="self-stretch rounded-[3px] flex flex-col justify-center items-center gap-4 sm:gap-5 md:gap-6 lg:gap-8">
+            <div className="pt-4 sm:pt-6 md:pt-8 lg:pt-12 pb-8 sm:pb-12 md:pb-16 flex flex-col justify-start items-center px-2 sm:px-4 md:px-8 lg:px-0 w-full sm:pl-0 sm:pr-0 pl-0 pr-0">
+              <div className="w-full max-w-[937px] lg:w-[937px] flex flex-col justify-center items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5">
+                <div className="self-stretch rounded-[3px] flex flex-col justify-center items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5">
                   <div className="w-full max-w-[748.71px] lg:w-[748.71px] text-center flex justify-center flex-col text-[#37322F] text-[24px] xs:text-[28px] sm:text-[36px] md:text-[52px] lg:text-[80px] font-normal leading-[1.1] sm:leading-[1.15] md:leading-[1.2] lg:leading-24 font-serif px-2 sm:px-4 md:px-0">
                     Understand your health,
                     <br />
@@ -144,21 +134,11 @@ export default function LandingPage() {
                     explainer videos powered by AI.
                   </div>
                 </div>
-              </div>
 
-              <div className="w-full max-w-[497px] lg:w-[497px] flex flex-col justify-center items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 relative z-10 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
-                <div className="backdrop-blur-[8.25px] flex justify-start items-center gap-4">
-                  <div className="h-10 sm:h-11 md:h-12 px-6 sm:px-8 md:px-10 lg:px-12 py-2 sm:py-[6px] relative bg-[#37322F] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-full flex justify-center items-center">
-                    <div className="w-20 sm:w-24 md:w-28 lg:w-44 h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-                    <div className="flex flex-col justify-center text-white text-sm sm:text-base md:text-[15px] font-medium leading-5 font-sans">
-                      Upload Report
-                    </div>
-                  </div>
+                {/* Compact Upload Button */}
+                <div className="mt-3 sm:mt-4 md:mt-6">
+                  <FileUploadZone compact={true} />
                 </div>
-              </div>
-
-              <div className="w-full mt-12 sm:mt-16 md:mt-20 lg:mt-24 relative z-10">
-                <FileUploadZone />
               </div>
 
               <div className="absolute top-[232px] sm:top-[248px] md:top-[264px] lg:top-[320px] left-1/2 transform -translate-x-1/2 z-0 pointer-events-none">
@@ -173,44 +153,23 @@ export default function LandingPage() {
               </div>
 
               <div className="w-full max-w-[960px] lg:w-[960px] pt-2 sm:pt-4 pb-6 sm:pb-8 md:pb-10 px-2 sm:px-4 md:px-6 lg:px-11 flex flex-col justify-center items-center gap-2 relative z-5 my-8 sm:my-12 md:my-16 lg:my-16 mb-0 lg:pb-0">
-                <div className="w-full max-w-[960px] lg:w-[960px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[695.55px] bg-white shadow-[0px_0px_0px_0.9056603908538818px_rgba(0,0,0,0.08)] overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] flex flex-col justify-start items-start">
-                  {/* Dashboard Content */}
-                  <div className="self-stretch flex-1 flex justify-start items-start">
-                    {/* Main Content */}
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="relative w-full h-full overflow-hidden">
-                        {/* Product Image 1 - Upload Report */}
-                        <div
-                          className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                            activeCard === 0 ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-sm"
-                          }`}
-                        >
-                          <img
-                            src="/images/design-mode/dsadsadsa.jpg.jpeg"
-                            alt="Upload Lab Report Interface"
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-
-                        {/* Product Image 2 - AI Analysis */}
-                        <div
-                          className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                            activeCard === 1 ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-sm"
-                          }`}
-                        >
-                          <img
-                            src="/analytics-dashboard-with-charts-graphs-and-data-vi.jpg"
-                            alt="AI Analysis Dashboard"
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-
-                        {/* Product Image 3 - Video Explanation */}
-                        
+                <Link href="/dashboard" className="w-full group">
+                  <div className="w-full max-w-[960px] lg:w-[960px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[600px] bg-white shadow-[0px_0px_0px_0.9056603908538818px_rgba(0,0,0,0.08)] hover:shadow-2xl overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] transition-all duration-300 cursor-pointer relative">
+                    {/* Dashboard Screenshot */}
+                    <img
+                      src="/dashboard-preview.png"
+                      alt="Health Dashboard - Track your reports and family health"
+                      className="w-full h-full object-cover object-top"
+                    />
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-[#37322F]/0 group-hover:bg-[#37322F]/10 transition-all duration-300 flex items-center justify-center">
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#37322F] text-white px-6 py-3 rounded-full font-medium shadow-xl">
+                        View Dashboard →
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
 
               <div className="self-stretch border-t border-[#E0DEDB] border-b border-[#E0DEDB] flex justify-center items-start">
@@ -428,11 +387,11 @@ export default function LandingPage() {
                         </p>
                       </div>
                       <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex items-center justify-center overflow-hidden">
-                        <SmartSimpleBrilliant
+                        <HealthDataVisual
                           width="100%"
                           height="100%"
                           theme="light"
-                          className="scale-50 sm:scale-65 md:scale-75 lg:scale-90"
+                          className="scale-75 sm:scale-85 md:scale-95 lg:scale-100"
                         />
                       </div>
                     </div>
@@ -448,11 +407,11 @@ export default function LandingPage() {
                         </p>
                       </div>
                       <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden text-right items-center justify-center">
-                        <YourWorkInSync
+                        <HealthTrackingVisual
                           width="400"
                           height="250"
                           theme="light"
-                          className="scale-60 sm:scale-75 md:scale-90"
+                          className="scale-75 sm:scale-85 md:scale-95"
                         />
                       </div>
                     </div>
@@ -470,7 +429,7 @@ export default function LandingPage() {
                       </div>
                       <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden justify-center items-center relative bg-transparent">
                         <div className="w-full h-full flex items-center justify-center bg-transparent">
-                          <EffortlessIntegration width={400} height={250} className="max-w-full max-h-full" />
+                          <LanguageSupportVisual width={400} height={250} className="max-w-full max-h-full" />
                         </div>
                         {/* Gradient mask for soft bottom edge */}
                         <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F7F5F3] to-transparent pointer-events-none"></div>
@@ -490,22 +449,15 @@ export default function LandingPage() {
                       </div>
                       <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden items-center justify-center relative">
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <NumbersThatSpeak
+                          <TestResultsVisual
                             width="100%"
                             height="100%"
                             theme="light"
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-contain scale-90"
                           />
                         </div>
                         {/* Gradient mask for soft bottom edge */}
                         <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F7F5F3] to-transparent pointer-events-none"></div>
-                        {/* Fallback content if component doesn't render */}
-                        <div className="absolute inset-0 flex items-center justify-center opacity-20 hidden">
-                          <div className="flex flex-col items-center gap-2 p-4">
-                            <div className="w-3/4 h-full bg-green-500 rounded-full"></div>
-                          </div>
-                          <div className="text-sm text-green-600">Health Status</div>
-                        </div>
                       </div>
                     </div>
                   </div>
