@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
+import { BookingWizard, type BookingFormData } from "@/components/booking-wizard"
 import { 
   Phone, 
   Video, 
@@ -33,16 +34,9 @@ interface Booking {
 
 export default function CallDoctorPage() {
   const [selectedService, setSelectedService] = useState<"ai" | "real" | null>(null)
-  const [showBookingForm, setShowBookingForm] = useState(false)
+  const [showBookingWizard, setShowBookingWizard] = useState(false)
   const [currentBooking, setCurrentBooking] = useState<Booking | null>(null)
   const [showReceipt, setShowReceipt] = useState(false)
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    concern: "",
-    preferredTime: "",
-  })
 
   // Fetch existing bookings on mount - only for logged in user
   useEffect(() => {
@@ -75,14 +69,12 @@ export default function CallDoctorPage() {
     window.location.href = "/#upload"
   }
 
-  const handleBooking = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
+  const handleBooking = async (bookingData: BookingFormData) => {
     try {
       const response = await fetch("/api/book-doctor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(bookingData),
       })
 
       const data = await response.json()
@@ -90,14 +82,7 @@ export default function CallDoctorPage() {
       if (data.success) {
         setCurrentBooking(data.booking)
         setShowReceipt(true)
-        setShowBookingForm(false)
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          concern: "",
-          preferredTime: "",
-        })
+        setShowBookingWizard(false)
       } else {
         alert("Booking failed. Please try again.")
       }
@@ -335,7 +320,7 @@ Thank you for choosing Tabeer AI!
                 </div>
 
                 <button
-                  onClick={() => setShowBookingForm(true)}
+                  onClick={() => setShowBookingWizard(true)}
                   className="w-full py-4 bg-[#37322F] text-white rounded-xl font-semibold hover:bg-[#37322F]/90 transition-all flex items-center justify-center gap-2"
                 >
                   <Phone className="w-5 h-5" />
@@ -526,83 +511,12 @@ Thank you for choosing Tabeer AI!
           </div>
         )}
 
-        {/* Booking Form Modal */}
-        {showBookingForm && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
-              <h3 className="text-2xl font-bold text-[#37322F] mb-6">Book Doctor Consultation</h3>
-              <form onSubmit={handleBooking} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-[#37322F] mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-[rgba(55,50,47,0.2)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37322F]"
-                    placeholder="Enter your name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#37322F] mb-2">Phone Number</label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 border border-[rgba(55,50,47,0.2)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37322F]"
-                    placeholder="Enter your phone"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#37322F] mb-2">Email</label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-[rgba(55,50,47,0.2)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37322F]"
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#37322F] mb-2">Health Concern</label>
-                  <textarea
-                    required
-                    value={formData.concern}
-                    onChange={(e) => setFormData({ ...formData, concern: e.target.value })}
-                    className="w-full px-4 py-3 border border-[rgba(55,50,47,0.2)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37322F] h-24"
-                    placeholder="Describe your health concern"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#37322F] mb-2">Preferred Time</label>
-                  <input
-                    type="datetime-local"
-                    required
-                    value={formData.preferredTime}
-                    onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                    className="w-full px-4 py-3 border border-[rgba(55,50,47,0.2)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37322F]"
-                  />
-                </div>
-                <div className="flex gap-3 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowBookingForm(false)}
-                    className="flex-1 py-3 border border-[rgba(55,50,47,0.2)] text-[#37322F] rounded-lg font-medium hover:bg-[#F7F5F3] transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 py-3 bg-[#37322F] text-white rounded-lg font-medium hover:bg-[#37322F]/90 transition-colors"
-                  >
-                    Submit Booking
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+        {/* Booking Wizard Modal */}
+        {showBookingWizard && (
+          <BookingWizard
+            onComplete={handleBooking}
+            onClose={() => setShowBookingWizard(false)}
+          />
         )}
       </div>
     </>
